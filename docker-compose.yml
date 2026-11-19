@@ -1,0 +1,76 @@
+
+services:
+
+  app:
+    user: appuser
+    image: app:latest
+    container_name: app-container
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app/storage:/app/storage
+    env_file:
+      - ./app/.env
+    environment:
+      - PYTHONPATH=/app
+      - HOME=/app
+      - XDG_CONFIG_HOME=/app/.config
+      - XDG_CACHE_HOME=/app/.cache
+      - METRICS_APP_URL=http://metrics:8001
+    restart: unless-stopped
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    # command: gunicorn src.main:app --config python:src.gunicorn_config
+
+  metrics:
+    image: metrics:latest
+    container_name: metrics-container
+    build:
+      context: ./metrics_client
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONPATH=/app
+      - HOME=/app
+    restart: unless-stopped
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8001 --reload
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    # Uncomment the following when the app runs locally.
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prom_data:/prometheus
+    # depends_on:
+    #   - app
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - prometheus
+
+volumes:
+  prom_data:
+  grafana_data:

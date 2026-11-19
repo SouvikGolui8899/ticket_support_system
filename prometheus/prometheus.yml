@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s
+
+
+scrape_configs:
+  - job_name: "support-system"
+    static_configs:
+      # - targets: ["host.docker.internal:8001"]  # use when app runs locally
+      - targets: ["metrics:8001"]  # comment this when app runs locally
