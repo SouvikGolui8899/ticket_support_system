@@ -12,4 +12,5 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
       - run: python -m pip install -r app/requirements.txt
+      - run: cp app/.env.example app/.env
       - run: python -m pytest app/src/tests/ -v
