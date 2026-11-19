@@ -1,10 +1,14 @@
 import pytest
 
+from src.db_models import create_all_tables
 from src.agents.classify.agent import get_classifier
 from src.agents.generate.agent import Generator
 from src.agents.ingest.agent import Ingester
 from src.agents.retrieve.agent import DocumentRetriever
 from src.agents.route.agent import Router
+
+
+create_all_tables()
 
 
 @pytest.fixture
