@@ -48,11 +48,11 @@ make up
 
 2. Provide any ticket in expected JSON format and click send. This executes the pipeline of agents and evaluates whether the ticket should be `AUTO-RESPONDED` or `ESCALATED`.
 
-<video src="img/AppDemo.mp4" controls></video>
+![Application Demo](img/AppDemo.gif)
 
 3. Open your browser at [http://localhost:3000](http://localhost:3000) . This opens the Grafana login page. You can login using the user as `admin` and password as `grafana`. Here you navigate to the dashboard already built for visualization of different metrics.
 
-<video src="img/MetricsDemo.mp4" controls></video>
+![Metrics Demo](img/MetricsDemo.gif)
 
 ### EVALS
 
