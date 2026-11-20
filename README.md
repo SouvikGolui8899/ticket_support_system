@@ -65,7 +65,7 @@ make eval
 To test the evals on development dataset use:
 
 ```bash
-make eval
+make dev-eval
 ```
 
 To test the evals on any other dataset present in your local directory use:
