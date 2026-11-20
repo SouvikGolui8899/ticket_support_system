@@ -91,7 +91,7 @@ make down
 2. If you would like to clean all the images please use:
 
 ```bash
-docker system prune -a
+docker system prune -a --volumes
 ```
 
-Note that the above command deletes all the stopped container along with their images.
+Note that the above command deletes all the stopped container along with their images and volumes.
