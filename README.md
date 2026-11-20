@@ -1,5 +1,9 @@
 ## README
 
+### REPOSITORY
+
+The respository for this system is [https://github.com/SouvikGolui8899/ticket_support_system](https://github.com/SouvikGolui8899/ticket_support_system)
+
 ### PROBLEM
 
 CloudServe, a fictional client, faces challenges in maintaining high customer satisfaction while managing support agent attrition. The objective is to develop an autonomous support system that efficiently resolves customer queries, enhances customer satisfaction, reduces the workload and stress of support agents, and minimizes agent attrition through improved operational efficiency and employee experience.
